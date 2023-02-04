@@ -1,0 +1,2 @@
+class HealthExaminationStandardResult < ApplicationRecord
+end
