@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_04_085016) do
+ActiveRecord::Schema.define(version: 2023_02_11_144755) do
 
   create_table "health_examination_results", charset: "utf8mb4", force: :cascade do |t|
     t.float "height"
@@ -23,20 +23,20 @@ ActiveRecord::Schema.define(version: 2023_02_04_085016) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "examination_file_path"
     t.index ["user_id"], name: "index_health_examination_results_on_user_id"
   end
 
   create_table "health_examination_standard_results", charset: "utf8mb4", force: :cascade do |t|
     t.integer "age"
     t.string "gender"
-    t.float "height"
-    t.float "weight"
     t.float "ldl_cholesterol"
     t.float "fpg"
     t.float "gamma_gtp"
     t.float "uric_acid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "bmi"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2023_02_04_085016) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
   end
 
   add_foreign_key "health_examination_results", "users"

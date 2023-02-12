@@ -1,0 +1,46 @@
+<h1><%= @health_examination_result.id %> 健康診断日: <%= @health_examination_result.examination_date %></h1>
+
+<div class="row">
+  <div class="col-sm-6">
+    <% if @health_examination_result.examination_file_path.url %>
+       <%= image_tag  @health_examination_result.examination_file_path.url,
+         class:"img-fluid" %>
+    <% end %>
+  </div>
+  
+  <div class="col-sm-6">
+    <table class="table">
+      <tr>
+        <th>身長</th>
+        <td><%= @health_examination_result.height ? @health_examination_result.height : 'データ無し' %></td>
+      </tr>
+      <tr>
+        <th>体重</th>
+        <td><%= @health_examination_result.weight ? @health_examination_result.weight : 'データ無し' %></td>
+      </tr>
+      <tr>
+        <th>BMI</th>
+        <td><%= @health_examination_result.height && @health_examination_result.weight ? (@health_examination_result.weight / (@health_examination_result.height / 100 ) ** 2).floor(1) : 'データ無し' %></td>
+      </tr>
+      <tr>
+        <th>LDLコレステロール</th>
+        <td><%= @health_examination_result.ldl_cholesterol ? @health_examination_result.ldl_cholesterol : 'データ無し' %></td>
+      </tr>
+      <tr>
+        <th>空腹時血糖値</th>
+        <td><%= @health_examination_result.fpg ? @health_examination_result.fpg : 'データ無し' %></td>
+      </tr>
+      <tr>
+        <th>γ-GTP</th>
+        <td><%= @health_examination_result.gamma_gtp ? @health_examination_result.gamma_gtp : 'データ無し' %></td>
+      </tr>
+      <tr>
+        <th>尿酸値</th>
+        <td><%= @health_examination_result.uric_acid ? @health_examination_result.uric_acid : 'データ無し' %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= link_to 'この診断結果を編集する', edit_health_examination_result_path(@health_examination_result), class: "btn btn-secondary mb-3" %>
+<%= link_to 'この診断結果を削除する', @health_examination_result, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger mb-3" %>

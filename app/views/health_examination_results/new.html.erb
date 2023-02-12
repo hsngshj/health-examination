@@ -1,0 +1,32 @@
+<h1>健康診断結果を登録する</h1>
+
+<div class="row">
+  <%= form_with(model: @health_examination_result) do |f| %>
+    <div class="col-6">
+      <% if @health_examination_result.errors.any? %>
+        <div id="error_explanation" class="alert alert-warning">
+          <ul class="Kmb-0">
+            <% @health_examination_result.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+        
+      <div class="mb-3">
+        <div class="mb-3">
+          <%= f.label :examination_file_path, '健康診断結果をアップロードしてください' %>
+          <br>
+          <%= f.file_field :examination_file_path %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :examination_date, '健康診断日' %>
+          <%= f.date_field :examination_date, class: "form-control" %>
+        </div>
+      </div>
+        
+      <%= f.submit '保存する', class: "btn btn-primary" %>
+          
+    </div>
+  <% end %>
+</div>

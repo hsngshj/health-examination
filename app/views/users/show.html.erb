@@ -1,0 +1,29 @@
+<h1><%= @user.name %> さんのプロフィール</h1>
+
+<div class="col-sm-6">
+  <table class="table">
+    <tr>
+      <th>名前</th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th>性別</th>
+      <td><%= @user.gender %></td>
+    </tr>
+    <tr>
+      <th>生年月日</th>
+      <td><%= @user.birth_date %></td>
+    </tr>
+    <tr>
+      <th>登録日時</th>
+      <td><%= @user.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+    </tr>
+  </table>
+</div>
+
+<%= link_to 'プロフィールを編集する', edit_user_path(@user), class: "btn btn-secondary mb-2" %>
+<%= link_to 'アカウントを削除する', @user, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger mb-2" %>

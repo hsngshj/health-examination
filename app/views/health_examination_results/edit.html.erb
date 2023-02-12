@@ -1,0 +1,73 @@
+<h1><%= @health_examination_result.id %> 診断日: <%= @health_examination_result.examination_date %> を編集する</h1>
+
+<div class="row">
+  <div class="col-6">
+    <% if @health_examination_result.examination_file_path.url %>
+       <%= image_tag  @health_examination_result.examination_file_path.url,
+         class:"img-fluid" %>
+    <% end %>
+  </div>
+  
+  <div class="col-6">
+    <%= form_with(model: @health_examination_result, class:'d-inline') do |f| %>
+      <% if @health_examination_result.errors.any? %>
+        <div id="error_explanation" class="alert alert-warning">
+          <ul class="Kmb-0">
+            <% @health_examination_result.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+        
+      <div class="mb-3">
+        <%= f.label :examination_file_path, '健康診断結果をアップロードしてください' %>
+        <%= f.file_field :examination_file_path %>
+      </div>
+      
+      <div class="mb-3">
+        <%= f.label :examination_date, '健康診断日' %>
+        <%= f.date_field :examination_date, class: "form-control" %>
+      </div>
+        
+      <div class="mb-3">
+        <%= f.label :height, '身長' %>
+        <%= f.number_field :height, class: "form-control", list: "states", step: "0.01" %>
+      </div>
+        
+      <div class="mb-3">
+        <%= f.label :weight, '体重' %>
+        <%= f.number_field :weight, class: "form-control", list: "states", step: "0.01" %>
+      </div>
+        
+      <div class="mb-3">
+        <%= f.label :ldl_cholesterol, 'LDLコレステロール' %>
+        <%= f.number_field :ldl_cholesterol, class: "form-control", list: "states", step: "0.01" %>
+      </div>
+        
+      <div class="mb-3">
+        <%= f.label :fpg, '空腹時血糖値' %>
+        <%= f.number_field :fpg, class: "form-control", list: "states", step: "0.01" %>
+      </div>
+        
+      <div class="mb-3">
+        <%= f.label :gamma_gtp, 'γ-GTP' %>
+        <%= f.number_field :gamma_gtp, class: "form-control", list: "states", step: "0.01" %>
+      </div>
+        
+      <div class="mb-3">
+        <%= f.label :uric_acid, '尿酸値' %>
+        <%= f.number_field :uric_acid, class: "form-control", list: "states", step: "0.01" %>
+      </div>
+        
+      <datalist id="states">
+        <% @text_array.each do |text| %>
+          <option value= <%= text %> >
+        <% end %>
+      </datalist>
+        
+      <%= f.submit '保存する', class: "btn btn-primary" %>
+          
+    <% end %>
+  </div>
+</div>

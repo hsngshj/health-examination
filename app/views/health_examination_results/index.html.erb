@@ -1,0 +1,25 @@
+<h1><%= current_user.name %> さんの健康診断結果一覧</h1>
+
+<div class="row">
+  <div class="col-sm-6">
+    <% if current_user.health_examination_results.exists? %>
+      <table class="table table-primary table-striped">
+        <tr>
+          <th>ID</th>
+          <th>健康診断日</th>
+        </tr>
+        <% @health_examination_result.each do |examination| %>
+          <tr>
+            <td><%= link_to "#{examination.id}", health_examination_result_path(examination.id) %></td>
+            <td><%= examination.examination_date %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p>
+        健康診断結果がありません。
+        まずは最新の診断結果を登録しましょう。
+      </p>
+    <% end %>
+  </div>
+</div>

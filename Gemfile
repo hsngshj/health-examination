@@ -47,3 +47,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'pg', '>= 0.18', '< 2.0'
 end
+
+gem 'google-cloud-vision', '~> 1.2'
+
+gem 'dotenv-rails'
+
+# gem 'rmagick', '~> 3.1'
+
+gem 'carrierwave', '~> 1.0'
+
+gem 'chart-js-rails', '~> 0.1.4'
