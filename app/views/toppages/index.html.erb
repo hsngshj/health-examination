@@ -1,6 +1,6 @@
 <% if logged_in? && data_check %>
   <div class="row">
-    <h1><%= current_user.name %>さんの最新の健康診断結果</h1>
+    <h1><%= @user.name %>さんの最新の健康診断結果</h1>
     
     <div class="col-sm-6 mb-3">
       <canvas id="RaderChart"></canvas>
@@ -9,24 +9,14 @@
   </div>
     
   <div class="row">
-    <h1><%= current_user.name %>さんのxxの診断推移</h1>
+    <h1><%= @user.name %>さんのLDLコレステロールの診断推移</h1>
     <div class="col-sm-8">
       <canvas id="LineChart"></canvas>
-<%
-=begin
-%>
-  <%= form_with url: root_path do |f| %>
-    <%= f.select :data_column, {'LDLコレステロール': 'ldl_cholesterol', '空腹時血糖値': 'fpg'}, {selected: 'ldl_cholesterol'}, { class: 'form-control' , required: true } %>
-    <%= f.submit %>
-  <% end %>
-<%
-=end
-%>
     </div>
   </div>
       
   <script>
-    const rader_ctx = document.getElementById("RaderChart");
+    var rader_ctx = document.getElementById("RaderChart");
     
     const rader_data = {
       labels: [
@@ -95,12 +85,14 @@
      });
   </script>
 
-  <% elsif logged_in?%>
-    <p>
-      健康診断結果が未登録です。
-      最新の健康診断結果を登録しましょう！
+  <% elsif logged_in? && !!@health_examination_result %>
+    <p>健康診断結果の登録が途中です。<br>
+    <%= link_to 'こちら', edit_health_examination_result_path(@health_examination_result) %>から最後までデータを入力しましょう！</p>
+  <% elsif logged_in?  %>
+    <p>健康診断結果が未登録です。<br>
+    最新の健康診断結果を登録しましょう！
     </p>
   <% else %>
     <h1>健康診断アプリです！</h1>
-    <p>アカウントの無い方はsingupしましょう！</p>
+    <p>アカウントの無い方は<%= link_to 'Sign Up', signup_path %>しましょう！</p>
   <% end %>

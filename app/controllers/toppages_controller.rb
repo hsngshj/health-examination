@@ -3,13 +3,15 @@ class ToppagesController < ApplicationController
   
   def index
     @user = current_user
-    @health_examination_result = @user.health_examination_results.where(examination_date: HealthExaminationResult.maximum(:examination_date)).last
-    
-    if logged_in? && data_check
-      cal_user_age
-      set_radarchart_data
-      set_linechart_data
-    elsif logged_in?
+
+    if logged_in?
+      @health_examination_result = @user.health_examination_results.where(examination_date: HealthExaminationResult.maximum(:examination_date)).last
+      
+      if data_check
+        cal_user_age
+        set_radarchart_data
+        set_linechart_data
+      end
     end
   end
   
@@ -51,16 +53,9 @@ class ToppagesController < ApplicationController
   
   def set_linechart_data
     @linechart_data_hash = {}
-    # @data_column = 'ldl_cholesterol'
-    
+
     @user.health_examination_results.each do |data|
       @linechart_data_hash.store(data.examination_date.strftime("%Y/%m/%d"), data.ldl_cholesterol)
     end
   end
-  
-  # def data_check
-  #   if !!@health_examination_result.height && !!@health_examination_result.weight && !!@health_examination_result.ldl_cholesterol && !!@health_examination_result.fpg && !!@health_examination_result.gamma_gtp && !!@health_examination_result.uric_acid
-  #     return true
-  #   end
-  # end
 end

@@ -1,7 +1,6 @@
 module HealthExaminationResultsHelper
   def data_check
-    
-    if !@health_examination_result.any?
+    if !@health_examination_result
       return false
     elsif !!@health_examination_result.height && !!@health_examination_result.weight &&
       !!@health_examination_result.ldl_cholesterol && !!@health_examination_result.fpg &&
