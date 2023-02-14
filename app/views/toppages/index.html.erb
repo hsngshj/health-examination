@@ -1,4 +1,4 @@
-<% if logged_in? && current_user.health_examination_results.exists? %>
+<% if logged_in? && data_check %>
   <div class="row">
     <h1><%= current_user.name %>さんの最新の健康診断結果</h1>
     

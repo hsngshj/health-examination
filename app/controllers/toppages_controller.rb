@@ -1,10 +1,13 @@
 class ToppagesController < ApplicationController
+  include HealthExaminationResultsHelper
+  
   def index
     @user = current_user
+    @health_examination_result = @user.health_examination_results.where(examination_date: HealthExaminationResult.maximum(:examination_date)).last
     
-    if logged_in? && current_user.health_examination_results.exists?
+    if logged_in? && data_check
       cal_user_age
-      set_radar_data
+      set_radarchart_data
       set_linechart_data
     elsif logged_in?
     end
@@ -21,8 +24,7 @@ class ToppagesController < ApplicationController
     end
   end
   
-  def set_radar_data
-    @health_examination_result = @user.health_examination_results.where(examination_date: HealthExaminationResult.maximum(:examination_date)).last
+  def set_radarchart_data
     @health_examination_standard_result = HealthExaminationStandardResult.where(age: @age, gender: @user.gender).first
     
     @bmi = @health_examination_result.weight / (@health_examination_result.height / 100 ) ** 2
@@ -55,4 +57,10 @@ class ToppagesController < ApplicationController
       @linechart_data_hash.store(data.examination_date.strftime("%Y/%m/%d"), data.ldl_cholesterol)
     end
   end
+  
+  # def data_check
+  #   if !!@health_examination_result.height && !!@health_examination_result.weight && !!@health_examination_result.ldl_cholesterol && !!@health_examination_result.fpg && !!@health_examination_result.gamma_gtp && !!@health_examination_result.uric_acid
+  #     return true
+  #   end
+  # end
 end
