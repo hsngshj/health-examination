@@ -35,7 +35,7 @@ class HealthExaminationResultsController < ApplicationController
             redirect_to health_examination_result_path(@health_examination_result)
         else
             flash[:danger] = '健康診断結果が保存されませんでした'
-            render :new
+            render :show
         end
     end
 
