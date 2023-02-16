@@ -3,8 +3,14 @@
     <h1><%= @user.name %>さんの最新の健康診断結果</h1>
     
     <div class="col-sm-6 mb-3">
-      <canvas id="RaderChart"></canvas>
-      <p>※各指標の標準値を80にした場合の診断結果を表示しています</p>
+      <% if !!@health_examination_standard_result %>
+        <canvas id="RaderChart"></canvas>
+        <p>※各指標の標準値を80にした場合の診断結果を表示しています</p>
+      <% else %>
+        <p>あなたの年齢、生年月日に適した各健康診断指標の標準値が無いのでレーダーチャートは表示されません。<br>
+          サービス運営者にといあわせてください。
+        </p>
+      <% end %>
     </div>
   </div>
     
