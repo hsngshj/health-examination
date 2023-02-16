@@ -61,9 +61,15 @@
       </div>
         
       <datalist id="states">
-        <% @text_array.each do |text| %>
-          <option value= <%= text %> >
-        <% end %>
+<%
+=begin
+%>
+<% @text_array.each do |text| %>
+  <option value= <%= text %> >
+<% end %>
+<%
+=end
+%>
       </datalist>
         
       <%= f.submit '保存する', class: "btn btn-primary" %>

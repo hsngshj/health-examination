@@ -26,7 +26,7 @@ class HealthExaminationResultsController < ApplicationController
     end
 
     def edit
-        set_datalist
+        # set_datalist
     end
     
     def update
